@@ -159,8 +159,7 @@ figure {
   max-width: var(--outer-max);
   margin: 0 auto;
   padding-left: var(--pad-d);
-  padding-right: var(--pad-d);
-  padding-bottom: var(--pad-m);
+  padding-right: var(--pad-d)
 }
 
 @media(max-width:1024px) {
@@ -431,12 +430,11 @@ figure {
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid currentColor;
-  text-align: center;
+  border: 1px solid currentColor
 }
 
 .btn-secondary:hover {
-  background: var(--gold);
+  background: var(--ink);
   color: white;
   border-color: var(--ink)
 }
@@ -841,7 +839,6 @@ figure {
 
 /* 8. PILLARS */
 .pillars {
-  
   background: var(--off-white)
 }
 
@@ -2253,11 +2250,6 @@ video {
   transform: scale(1.06);
 }
 
-/* Badge - top left on image */
-/* .pub-media .pub-badge,
-.pub-card>.pub-media::before {
- 
-} */
 
 .pub-card .pub-meta {
   /* Reset from old absolute bug — now static pill below title */
@@ -2314,17 +2306,17 @@ video {
   color: #fff;
   border: 1px solid var(--ink);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  /* display: flex;
+  display: flex;
   align-items: center;
-  justify-content: space-between; */
+  justify-content: space-between;
   padding: 0 5px 0 16px;
   transition: all 0.25s ease;
 }
 
-/* .pub-actions .btn::after {
+.pub-actions .btn::after {
   content: '→';
   width: 30px;
   height: 30px;
@@ -2336,7 +2328,7 @@ video {
   font-size: 13px;
   transition: transform 0.25s ease;
 }
- */
+
 .pub-actions .btn:hover {
   background: #1D2A35;
   transform: translateY(-1px);
@@ -2399,5 +2391,280 @@ video {
     width: 26px;
     height: 26px;
     font-size: 11px;
+  }
+}
+
+
+/* ================================================
+   FIX PATCH 4 — NEWS 60/40 editorial centering on mobile
+   Fixes left shift / partial visibility
+   ================================================ */
+
+.news {
+  overflow: hidden;
+  position: relative;
+}
+
+.news .outer,
+.news .container {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.news-main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.news-featured,
+.news-side {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.news-small {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.news-small>div {
+  min-width: 0;
+  flex: 1;
+}
+
+/* Desktop keeps 60/40 */
+@media (min-width: 1025px) {
+  .news-main {
+    grid-template-columns: 7fr 5fr;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .news-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Mobile — center everything, fix overflow */
+@media (max-width: 767px) {
+  .news.section-pad .outer {
+    padding-left: var(--pad-m);
+    padding-right: var(--pad-m);
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .news.section-pad .outer>.container {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .news-main {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+    max-width: 600px;
+    /* centered readable column like other sections */
+    margin: 40px auto 0;
+    align-items: stretch;
+  }
+
+  .news-featured {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Fix the first image — remove forced height that causes overflow, keep taller but responsive */
+  .news-featured-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 3 !important;
+    /* taller than 16/10 but not fixed height */
+    max-height: 520px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .news-featured-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .news-side {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+
+  .news-small {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .news-small-media {
+    width: 96px;
+    flex-shrink: 0;
+  }
+}
+
+/* Extra small — ensure no side cut */
+@media (max-width: 480px) {
+  .news-main {
+    max-width: 100%;
+  }
+
+  .news-featured-media {
+    aspect-ratio: 3 / 3.2 !important;
+    max-height: 440px;
+  }
+}
+
+
+/* ================================================
+   FIX PATCH 5 — NEWSLETTER Subscribe button container
+   Fixes button overflowing outside its box
+   ================================================ */
+
+.news-side article:last-child,
+.news-side article[style*="border"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.news-side article:last-child .mt-16,
+.news-side .mt-16 {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.news-side .mt-16 input[type="email"] {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.news-side .mt-16 .btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile specific */
+@media (max-width: 767px) {
+  .news-side article:last-child {
+    padding: 16px !important;
+  }
+
+  .news-side .mt-16 {
+    gap: 8px;
+  }
+
+  .news-side .mt-16 input[type="email"] {
+    height: 44px !important;
+    font-size: 14px;
+  }
+
+  .news-side .mt-16 .btn {
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .news-side .mt-16 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .news-side .mt-16 input[type="email"],
+  .news-side .mt-16 .btn {
+    width: 100%;
+  }
+
+  .news-side .mt-16 .btn {
+    height: 44px;
+  }
+}
+
+
+/* ================================================
+   FIX PATCH 6 — Email input height increased
+   ================================================ */
+
+.news-side .mt-16 input[type="email"] {
+  height: 50px !important;
+  min-height: 50px !important;
+  padding: 0 16px !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  border-radius: 10px !important;
+}
+
+.news-side .mt-16 .btn {
+  height: 50px !important;
+  min-height: 50px !important;
+  padding: 0 22px !important;
+  font-size: 13px !important;
+  border-radius: 10px !important;
+}
+
+@media (max-width: 767px) {
+  .news-side .mt-16 input[type="email"] {
+    height: 50px !important;
+    min-height: 50px !important;
+    font-size: 15px !important;
+  }
+
+  .news-side .mt-16 .btn {
+    height: 50px !important;
+    min-height: 50px !important;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .news-side .mt-16 input[type="email"],
+  .news-side .mt-16 .btn {
+    height: 50px !important;
   }
 }
