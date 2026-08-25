@@ -1415,7 +1415,7 @@ figure {
 
 @media(max-width:600px) {
   .pubs-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px
   }
 }
@@ -1895,12 +1895,12 @@ figure {
 }
 
 /* Publications actions */
-.pub-actions {
+/* .pub-actions {
   margin-top: 12px;
   display: flex;
   gap: 10px;
   align-items: center
-}
+} */
 
 .pub-actions .btn {
   padding: 8px 14px;
@@ -2196,7 +2196,7 @@ video {
 
 @media (max-width: 520px) {
   .pubs-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
@@ -2250,6 +2250,11 @@ video {
   transform: scale(1.06);
 }
 
+/* Badge - top left on image */
+.pub-media .pub-badge,
+.pub-card>.pub-media::before {
+  /* fallback if no badge element */
+}
 
 .pub-card .pub-meta {
   /* Reset from old absolute bug — now static pill below title */
@@ -2287,7 +2292,7 @@ video {
   margin: 14px 10px 0;
   color: var(--ink);
   display: -webkit-box;
-  /* -webkit-line-clamp: 2; */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 40px;
@@ -2296,6 +2301,7 @@ video {
 .pub-actions {
   margin-top: auto;
   padding: 14px 8px 0;
+  text-align: center;
 }
 
 .pub-actions .btn {
@@ -2306,17 +2312,17 @@ video {
   color: #fff;
   border: 1px solid var(--ink);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
   padding: 0 5px 0 16px;
   transition: all 0.25s ease;
 }
 
-.pub-actions .btn::after {
+/* .pub-actions .btn::after {
   content: '→';
   width: 30px;
   height: 30px;
@@ -2327,7 +2333,7 @@ video {
   place-items: center;
   font-size: 13px;
   transition: transform 0.25s ease;
-}
+} */
 
 .pub-actions .btn:hover {
   background: #1D2A35;
@@ -2666,5 +2672,23 @@ video {
   .news-side .mt-16 input[type="email"],
   .news-side .mt-16 .btn {
     height: 50px !important;
+  }
+}
+
+
+
+/* Mobile magazine - single column */
+@media (max-width: 600px) {
+  .pubs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pub-card {
+    max-width: 100%;
+  }
+
+  .pub-media {
+    aspect-ratio: 4 / 5;
   }
 }
